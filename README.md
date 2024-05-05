@@ -7,3 +7,12 @@ This project is just the beginning of a complex back end application and can be 
 
 ## Technology 
 This application is powered by Node.js (v16.19.1), Express.js (v14.17.1), JavaScript, MySQL, and Sequelize (ORM). It utilizes the node package manager (npm) dependencies sequelize (v5.22.5), mysql2 (v2.3.3), express (v4.17.1), dotenv (v8.6.0), and nodemon (v2.0.3).
+
+## Install
+Terminal commands to install dependencies:
+
+- Command for sequelize npm i sequelize
+- Command for mysql2 be npm i mysql2
+- Command for express npm i express
+- Command for dotenv npm i dotenv
+- Command for nodemon npm i nodemon
