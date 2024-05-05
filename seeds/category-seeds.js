@@ -1,23 +1,91 @@
-const { Category } = require('../models');
+// Import
+const router = require("express").Router();
+const { Category, Product } = require("../../models");
 
-const categoryData = [
-  {
-    category_name: 'Shirts',
-  },
-  {
-    category_name: 'Shorts',
-  },
-  {
-    category_name: 'Music',
-  },
-  {
-    category_name: 'Hats',
-  },
-  {
-    category_name: 'Shoes',
-  },
-];
+// The `/api/categories` endpoint
 
-const seedCategories = () => Category.bulkCreate(categoryData);
+router.get("/", (req, res) => {
+  // find all categories including its associated Products
+  Category.findAll({
+    attributes: ["id", "category_name"],
+    include: [
+      {
+        model: Product,
+        attributes: ["id", "product_name", "price", "stock", "category_id"],
+      },
+    ],
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
 
-module.exports = seedCategories;
+router.get("/:id", (req, res) => {
+  // find one category by its `id` value including its associated Products
+  Category.findOne({
+    where: {
+      id: req.params.id,
+    },
+    attributes: ["id", "category_name"],
+    include: [
+      {
+        model: Product,
+        attributes: ["id", "product_name", "price", "stock", "category_id"],
+      },
+    ],
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+router.post("/", (req, res) => {
+  // creates new category
+  console.log(req.body);
+  Category.create({ category_name: req.body.category_name })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+router.put("/:id", (req, res) => {
+  // updates a category by its `id` value
+  Category.update(req.body, {
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  // deletes a category by its `id` value
+  Category.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
+
+// Export
+module.exports = router;
