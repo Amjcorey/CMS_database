@@ -12,7 +12,7 @@ This application is powered by Node.js (v16.19.1), Express.js (v14.17.1), JavaSc
 Terminal commands to install dependencies:
 
 - Command for sequelize npm i sequelize
-- Command for mysql2 be npm i mysql2
+- Command for mysql2 npm i mysql2
 - Command for express npm i express
 - Command for dotenv npm i dotenv
 - Command for nodemon npm i nodemon
